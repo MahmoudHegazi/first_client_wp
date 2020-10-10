@@ -8,9 +8,9 @@
 
 <body>
 
-  <?php
-  global $wpdb;
-  $loged_user_id = get_current_user_id();
+<?php
+global $wpdb;
+$loged_user_id = get_current_user_id();
 function title_for_id($post_title, $post_status) {
 global $wpdb;
 //$lesson1_part1 = 'مخطط لصفحات موقع قاموس "مصطلحات الكمبيوتر المصور"';
@@ -41,10 +41,11 @@ return $post_id ;
 // copy this and paste it in the title of each element change the title in the current_post_id
 // give the post title to this function to get the post id
 $current_post_id = title_for_id('مخطط لصفحات موقع قاموس "مصطلحات الكمبيوتر المصور"', 'publish');
-$viewsCount = $wpdb->get_var("SELECT count(meta_key) FROM wp_postmeta WHERE meta_key = '_post_view' AND post_id=$current_post_id");
+$viewsCount = $wpdb->get_var("SELECT count(meta_key) FROM wp_postmeta WHERE meta_key = '_post_view' AND post_id=$current_post_id AND meta_value=$loged_user_id");
 echo 'عدد الزيارات: ' . $viewsCount . ' , ';
 
-$view_dates = $wpdb->get_var("SELECT meta_value FROM wp_postmeta WHERE meta_key = '_view_date' AND post_id=$current_post_id ORDER BY meta_id DESC");
+
+$view_dates = $wpdb->get_var("SELECT meta_value FROM wp_postmeta WHERE meta_key = $loged_user_id AND post_id=$current_post_id ORDER BY meta_id DESC");
 
 //Get the current time in Unix.
 $currentTime = $view_dates;
@@ -73,10 +74,10 @@ echo 'تاريخ اخر زيارة : ' . $egypttime;
 // copy this and paste it in the title of each element change the title in the current_post_id
 // give the post title to this function to get the post id
 $current_post_id = title_for_id('متطلبات ومراحل إنتاج المشروع', 'publish');
-$viewsCount = $wpdb->get_var("SELECT count(meta_key) FROM wp_postmeta WHERE meta_key = '_post_view' AND post_id=$current_post_id");
+$viewsCount = $wpdb->get_var("SELECT count(meta_key) FROM wp_postmeta WHERE meta_key = '_post_view' AND post_id=$current_post_id AND meta_value=$loged_user_id");
 echo 'عدد الزيارات: ' . $viewsCount . ' |   ';
 
-$view_dates = $wpdb->get_var("SELECT meta_value FROM wp_postmeta WHERE meta_key = '_view_date' AND post_id=$current_post_id ORDER BY meta_id DESC");
+$view_dates = $wpdb->get_var("SELECT meta_value FROM wp_postmeta WHERE meta_key = $loged_user_id AND post_id=$current_post_id ORDER BY meta_id DESC");
 
 //Get the current time in Unix.
 if (!empty($view_dates)) {
@@ -107,10 +108,12 @@ echo 'تاريخ اخر زيارة : ' . $last_vist_time;
 // copy this and paste it in the title of each element change the title in the current_post_id
 // give the post title to this function to get the post id
 $current_post_id = title_for_id('اختبار', 'publish');
-$viewsCount = $wpdb->get_var("SELECT count(meta_key) FROM wp_postmeta WHERE meta_key = '_post_view' AND post_id=$current_post_id");
+$viewsCount = $wpdb->get_var("SELECT count(meta_key) FROM wp_postmeta WHERE meta_key = '_post_view' AND post_id=$current_post_id AND meta_value=$loged_user_id");
 echo 'عدد الزيارات: ' . $viewsCount . ' |   ';
 
-$view_dates = $wpdb->get_var("SELECT meta_value FROM wp_postmeta WHERE meta_key = '_view_date' AND post_id=$current_post_id ORDER BY meta_id DESC");
+
+// handle loged user id
+$view_dates = $wpdb->get_var("SELECT meta_value FROM wp_postmeta WHERE meta_key = $loged_user_id AND post_id=$current_post_id ORDER BY meta_id DESC");
 
 //Get the current time in Unix.
 if (!empty($view_dates)) {
@@ -142,7 +145,7 @@ echo 'تاريخ اخر زيارة : ' . $last_vist_time;
 $(document).ready(function(){
 
 
-  $('a').click(function(){
+  $('.page_link').click(function(){
     var today = new Date();
     var click_date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+', '+today.getHours() + ':' + today.getMinutes() + ':' +  today.getSeconds();
     String(click_date);
