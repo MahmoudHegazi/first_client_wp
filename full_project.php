@@ -78,34 +78,10 @@ echo 'تاريخ اخر زيارة : ' . $egypttime;
   <!-- title step add this function with post title inside it -->
 <a class="page_link" href="http://www.4themers.com/eman2/project-processes/‎" title="يحتوى الدرس على شرح لمتطلبات ومراحل إنتاج المشروع
 
-<?php
-// copy this and paste it in the title of each element change the title in the current_post_id
-// give the post title to this function to get the post id
-$current_post_id = title_for_id('متطلبات ومراحل إنتاج المشروع', 'publish');
-$viewsCount = $wpdb->get_var("SELECT count(meta_key) FROM wp_postmeta WHERE meta_key = '_post_view' AND post_id=$current_post_id AND meta_value=$loged_user_id");
-echo 'عدد الزيارات: ' . $viewsCount . ' |   ';
-
-$view_dates = $wpdb->get_var("SELECT meta_value FROM wp_postmeta WHERE meta_key = $loged_user_id AND post_id=$current_post_id ORDER BY meta_id DESC");
-
-//Get the current time in Unix.
-if (!empty($view_dates)) {
-$currentTime = $view_dates;
-//The amount of hours that you want to add.
-$hoursToAdd = 2;
-//Convert the hours into seconds.
-$secondsToAdd = $hoursToAdd * (60 * 60);
-//Add the seconds onto the current Unix timestamp.
-$newTime = $currentTime + $secondsToAdd;
-//Print it out in a format that suits you.
-$last_vist_time = date("d/m/y H:i:s", $newTime);
-} else {
-  $last_vist_time = 'لا يوجد';
-}
-
-echo 'تاريخ اخر زيارة : ' . $last_vist_time;
-?>
-
+<?php page_views_data('متطلبات ومراحل إنتاج المشروع'); ?>
 ">
+
+
 <!-- add this data attrbuites to each <strong> element -->
 <strong data-post-id='<?php echo title_for_id('متطلبات ومراحل إنتاج المشروع', 'publish'); ?>' data-loged-uid='<?php echo  get_current_user_id(); ?>'>
   متطلبات ومراحل إنتاج المشروع</strong></a></p>
@@ -113,34 +89,7 @@ echo 'تاريخ اخر زيارة : ' . $last_vist_time;
 <p><span style="font-size:16.0pt;font-family:Symbol;color:red" >·</span>
 <a class="page_link" href="http://www.4themers.com/eman2/test-1/" title="يحتوى الرابط على اختبار عن مرحلة تصميم صفحات الموقع
 
-<?php
-// copy this and paste it in the title of each element change the title in the current_post_id
-// give the post title to this function to get the post id
-$current_post_id = title_for_id('اختبار', 'publish');
-$viewsCount = $wpdb->get_var("SELECT count(meta_key) FROM wp_postmeta WHERE meta_key = '_post_view' AND post_id=$current_post_id AND meta_value=$loged_user_id");
-echo 'عدد الزيارات: ' . $viewsCount . ' |   ';
-
-
-// handle loged user id
-$view_dates = $wpdb->get_var("SELECT meta_value FROM wp_postmeta WHERE meta_key = $loged_user_id AND post_id=$current_post_id ORDER BY meta_id DESC");
-
-//Get the current time in Unix.
-if (!empty($view_dates)) {
-$currentTime = $view_dates;
-//The amount of hours that you want to add.
-$hoursToAdd = 2;
-//Convert the hours into seconds.
-$secondsToAdd = $hoursToAdd * (60 * 60);
-//Add the seconds onto the current Unix timestamp.
-$newTime = $currentTime + $secondsToAdd;
-//Print it out in a format that suits you.
-$last_vist_time = date("d/m/y H:i:s", $newTime);
-} else {
-  $last_vist_time = 'لا يوجد';
-}
-
-echo 'تاريخ اخر زيارة : ' . $last_vist_time;
-?>
+<?php page_views_data('اختبار'); ?>
 
 ">
 <strong data-post-id='<?php echo title_for_id('اختبار', 'publish'); ?>'  data-loged-uid='<?php echo  get_current_user_id(); ?>'>اختبار (1)</strong></a></p>
