@@ -21,23 +21,14 @@ $post_id = $wpdb->get_var("SELECT ID FROM wp_posts WHERE post_title = '$post_tit
 return $post_id ;
 }
 
-?>
 
-<div dir=RTL>
-
-<h3 align=center><strong>متطلبات ومراحل إنتاج المشروع</strong></h3>
-
-<h4  id="zft" data-loged-uid='<?php echo  get_current_user_id(); ?>' data-sex2="dj"><strong>1- </strong>مرحلة تصميم صفحات الموقع</h4>
-
-
-<p><span style="font-size: 16pt; color: red; font-family: Symbol;">&middot;</span>
-<a  class="page_link" href="http://www.4themers.com/eman2/website-pages-plan/" title="يحتوى الدرس على شرح لمخطط لصفحات موقع قاموس مصطلحات الكمبيوتر المصور
-
-
-<?php
+function page_views_data($pagetitle) {
 // copy this and paste it in the title of each element change the title in the current_post_id
 // give the post title to this function to get the post id
-$current_post_id = title_for_id('مخطط لصفحات موقع قاموس "مصطلحات الكمبيوتر المصور"', 'publish');
+
+global $wpdb;
+$loged_user_id = get_current_user_id();
+$current_post_id = title_for_id($pagetitle, 'publish');
 $viewsCount = $wpdb->get_var("SELECT count(meta_key) FROM wp_postmeta WHERE meta_key = '_post_view' AND post_id=$current_post_id AND meta_value=$loged_user_id");
 echo 'عدد الزيارات: ' . $viewsCount . ' , ';
 
@@ -56,7 +47,26 @@ $newTime = $currentTime + $secondsToAdd;
 $egypttime = date("d/m/y H:i:s", $newTime);
 
 echo 'تاريخ اخر زيارة : ' . $egypttime;
+
+
+
+
+}
 ?>
+
+
+
+<div dir=RTL>
+
+<h3 align=center><strong>متطلبات ومراحل إنتاج المشروع</strong></h3>
+
+<h4  id="zft" data-loged-uid='<?php echo  get_current_user_id(); ?>' data-sex2="dj"><strong>1- </strong>مرحلة تصميم صفحات الموقع</h4>
+
+
+<p><span style="font-size: 16pt; color: red; font-family: Symbol;">&middot;</span>
+<a  class="page_link" href="http://www.4themers.com/eman2/website-pages-plan/" title="يحتوى الدرس على شرح لمخطط لصفحات موقع قاموس مصطلحات الكمبيوتر المصور
+
+<?php page_views_data('مخطط لصفحات موقع قاموس "مصطلحات الكمبيوتر المصور"'); ?>
 
 ">
 
@@ -1048,3 +1058,4 @@ getPrices();
 </body>
 
 </html>
+
